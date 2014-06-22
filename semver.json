@@ -1,0 +1,8 @@
+{
+	"name": "semver",
+	"description": "A tool for semantic versioning.",
+	"copyright": "Copyright © 2014, Hans Meyer",
+	"authors": ["Hans Meyer"],
+	"dependencies": {
+	}
+}
