@@ -55,6 +55,10 @@ unittest {
     assert( isValidSemver("1.2.3-prerelease"));
     assert( isValidSemver("172.13242.987034-beta.eta-kappa-123.41+csum-sha1.73409ABCDEF"));
 
+// TODO: This does not yet compile due to type mismatch in the template instantiantion of match
+//    assert( isValidSemver("1.0.0-alpha.1-4+sha1.afe12a98b"d));
+//    assert( isValidSemver("1.0.0-alpha.1-4+sha1.afe12a98b"w));
+
 }
 
 // TODO: compare two versions
