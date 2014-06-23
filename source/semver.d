@@ -1,6 +1,6 @@
 import std.traits, std.regex, std.string;
 
-enum semVerPattern = r"(?P<major>\d+?)\.(?P<minor>\d+?)\.(?P<patch>\d+)(?P<prerelease>-[a-zA-Z0-9-.]+)?(?P<build>\+[a-zA-Z0-9-.]+)?"; 
+enum semVerPattern = r"(?P<major>[0]|[1-9][0-9]*?)\.(?P<minor>[0]|[1-9][0-9]*?)\.(?P<patch>[0]|[1-9][0-9]*)(?P<prerelease>-[a-zA-Z0-9-.]+)?(?P<build>\+[a-zA-Z0-9-.]+)?"; 
 
 struct SemVer {
     uint major;
