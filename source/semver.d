@@ -1,20 +1,39 @@
-module semver;
+import std.traits, std.regex, std.string;
+
+enum semVerPattern = r"(?P<major>\d+?)\.(?P<minor>\d+?)\.(?P<patch>\d+)(?P<prerelease>-[a-zA-Z0-9-.]+)?(?P<build>\+[a-zA-Z0-9-.]+)?"; 
 
 struct SemVer {
-    int major;
-    int minor;
-    int patch;
-    string versionInformation;
-    string buildMetaData;
+    uint major;
+    uint minor;
+    uint patch;
+    string prerelease;
+    string build;
 }
 
-bool isValidSemver(string versionString) {
-    //read string to the first dot and go on only if it's a positive natural number, clear out leading zeros
-    //read to the next dot and do the same
-    //read to the end or the next dash or plus and go on only if it's a positive natural number, clear out leading zeroes
+bool isValidSemver(Version) (Version versionString)
+  if (isSomeString!Version)
+{
+    return match(versionString, semVerPattern).captures[0] == versionString;
+}
 
-    //read to the end or the next plus if there has not been any yet and check if it contains only alphanumeric ASCII letters or dashes
-    //read to the end and check if it contains only alphanumeric ASCII letters or dashes
+unittest {
+    assert(!isValidSemver("1"));
+    assert(!isValidSemver("1.0"));
+    assert(!isValidSemver("9600.16384.130821.1623"));
+    assert(!isValidSemver("a.b.c"));
+
+    assert( isValidSemver("0.1.0"));
+    assert( isValidSemver("1.123.4"));
+
+    assert(!isValidSemver("-4.0.12"));
+    assert(!isValidSemver("0.-14.3"));
+    assert(!isValidSemver("8.42.-17"));
+
+    assert( isValidSemver("172.13242.987034-beta.eta-kappa-123.41+csum-sha1.73409ABCDEF"));
+
+    assert(!isValidSemver("01239+-"));
+    assert( isValidSemver("1.2.3-prerelease"));
+
 }
 
 // TODO: compare two versions
