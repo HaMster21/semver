@@ -2,7 +2,12 @@ import std.traits, std.regex;
 
 template Pattern(StringType) {
    import std.conv;
-   auto rx = regex(to!StringType(`(?P<major>0|[1-9][0-9]*?)\.(?P<minor>0|[1-9][0-9]*?)\.(?P<patch>0|[1-9][0-9]*)(?P<prerelease>-[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*)?(?P<build>\+[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*)?`));
+   auto rx = regex(to!StringType(`(?P<major>0|[1-9][0-9]*?)\.
+                                  (?P<minor>0|[1-9][0-9]*?)\.
+                                  (?P<patch>0|[1-9][0-9]*)
+                                  (?P<prerelease>-[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*)?
+                                  (?P<build>\+[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*)?`
+                                 ),"x");
    alias Pattern = rx;
 }
 
