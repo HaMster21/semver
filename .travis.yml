@@ -1,14 +1,15 @@
 language: c
 before_install:
     - sudo wget http://netcologne.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list
-    - sudo apt-get update 
-    - sudo apt-get --allow-unauthenticated install --reinstall d-apt-keyring 
-    - sudo apt-get update
+    - sudo apt-get -qq update 
+    - sudo apt-get -qq --allow-unauthenticated install --reinstall d-apt-keyring 
+    - sudo apt-get -qq update
 
 install:
-    - sudo apt-get install dub libphobos2-65 dmd-bin
+    - sudo apt-get install -qq dub libphobos2-65 dmd-bin
 
 script:
     - dmd -w -wi -de -cov=090 -unittest source/app.d source/semver.d
+    - ./semver
     - dmd -O -release -inline -odobj -ofbin/semver -m64 source/app.d source/semver.d
     - cd bin && ../test/cli/parameter-test.sh 
