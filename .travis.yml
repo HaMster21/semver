@@ -10,9 +10,8 @@ install:
 
 script:
     - dmd -w -wi -de -cov -unittest -ofbin/semver source/app.d source/semver.d
-    - bin/semver -v 1.0.0
+    - cd bin && ../test/cli/parameter-test.sh 
     - bin/semver
     - cat source-app.lst
     - cat source-semver.lst
     - dmd -O -release -inline -odobj -ofbin/semver -m64 source/app.d source/semver.d
-    - cd bin && ../test/cli/parameter-test.sh 
