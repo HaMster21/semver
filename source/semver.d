@@ -40,6 +40,11 @@ struct SemVer {
         - ordering of prerelease and build information (prerelease first)
         - '+' and '-' directly following each other (not of any sense, 1.0.0+--- would be awkward)
         - ommiting information besides the X.Y.Z
+
+    Params:
+        versionString = the version specification that should be validated
+
+    Returns: true if the versionString fully matches the pattern and does not start with '0.0.0'
  +/
 bool isValidSemver(Version) (Version versionString) @safe
   if (isSomeString!Version)
@@ -49,6 +54,7 @@ bool isValidSemver(Version) (Version versionString) @safe
            && match(versionString, Pattern!Version).captures[0] == versionString;
 }
 
+///
 unittest {
     assert(!isValidSemver("0.0.0-alpha.12-15+build.today-14pm")); 
 
