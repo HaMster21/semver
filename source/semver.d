@@ -27,6 +27,20 @@ struct SemVer {
 }
 
 // TODO: since 'match' is neither pure nor nothrow, the validation function can't be as well. At the moment it can only be safe
+/++
+    Testing a given string for compliance with the semantic versioning specification
+
+    Strings that are parsed  can be of any built-in type D supports, meaning char[], wchar[] and 
+    dchar[].
+
+    If the string is not starting with version 0.0.0 and matches the VersionPattern completely,
+    it is valid (matching somewhere in the string is not). The pattern takes the following things 
+    into accout:
+        - leading zeroes
+        - ordering of prerelease and build information (prerelease first)
+        - '+' and '-' directly following each other (not of any sense, 1.0.0+--- would be awkward)
+        - ommiting information besides the X.Y.Z
+ +/
 bool isValidSemver(Version) (Version versionString) @safe
   if (isSomeString!Version)
 {
