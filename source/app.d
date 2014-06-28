@@ -15,8 +15,8 @@ int main(string[] args)
        default: std.stdio.writeln("Option not supported"); break;
        case "-v" ,"--validate": {
            if (args.length > 2) {
-               import semver: isValidSemver;
-               if (isValidSemver(args[2])) return 0; else return 1;
+               import semver: validate;
+               if (validate(args[2])) return 0; else return 1;
            }
            else {
                std.stdio.writeln("a version string is needed for evaluation. Try 'semver -v 1.2.3'");

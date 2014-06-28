@@ -1,13 +1,20 @@
 import std.traits, std.regex;
 
+public {
+    alias Version = SemVer;
+    alias validate = isValidSemver;
+    alias VersionPattern = Pattern;
+}
+
 template Pattern(StringType) {
    import std.conv;
-   auto rx = regex(to!StringType(`(?P<major>0|[1-9][0-9]*?)\.
-                                  (?P<minor>0|[1-9][0-9]*?)\.
-                                  (?P<patch>0|[1-9][0-9]*)
-                                  (?P<prerelease>-[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*)?
-                                  (?P<build>\+[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*)?`
-                                 ),"x");
+   auto rx = regex(to!StringType(
+                             `(?P<major>0|[1-9][0-9]*?)\.
+                              (?P<minor>0|[1-9][0-9]*?)\.
+                              (?P<patch>0|[1-9][0-9]*)
+                              (?P<prerelease>-[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*)?
+                              (?P<build>\+[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*)?`
+                             ),"x");
    alias Pattern = rx;
 }
 
@@ -19,7 +26,8 @@ struct SemVer {
     string build;
 }
 
-bool isValidSemver(Version) (Version versionString)
+// TODO: since 'match' is neither pure nor nothrow, the validation function can't be as well. At the moment it can only be safe
+bool isValidSemver(Version) (Version versionString) @safe
   if (isSomeString!Version)
 {
     import std.algorithm: startsWith;
