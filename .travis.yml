@@ -10,7 +10,7 @@ install:
 
 script:
     - dmd -w -wi -de -cov -unittest -ofbin/semver source/app.d source/semver.d
-    - bin/semver -v 0.0.0
+    - bin/semver -v 1.0.0
     - bin/semver
     - cat source-app.lst
     - cat source-semver.lst
