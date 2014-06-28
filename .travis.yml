@@ -9,7 +9,7 @@ install:
     - sudo apt-get install -qq dub libphobos2-65 dmd-bin
 
 script:
-    - dmd -w -wi -de -cov=090 -unittest source/app.d source/semver.d
-    - ./semver
+    - dmd -w -wi -de -cov=090 -unittest -ofbin/semver source/app.d source/semver.d
+    - bin/semver
     - dmd -O -release -inline -odobj -ofbin/semver -m64 source/app.d source/semver.d
     - cd bin && ../test/cli/parameter-test.sh 
