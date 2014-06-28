@@ -2,8 +2,9 @@ semver
 ======
 
 Builds:
-Master:[![Master](https://travis-ci.org/mog-wi/semver.svg?branch=master)](https://travis-ci.org/mog-wi/semver)
-Latest:[![Latest](https://travis-ci.org/mog-wi/semver.svg)](https://travis-ci.org/mog-wi/semver)
+
+Master: [![Master](https://travis-ci.org/mog-wi/semver.svg?branch=master)](https://travis-ci.org/mog-wi/semver)
+Latest: [![Latest](https://travis-ci.org/mog-wi/semver.svg)](https://travis-ci.org/mog-wi/semver)
 
 This project is two things:
 
